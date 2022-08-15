@@ -1,0 +1,86 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+
+Auth::routes();
+
+Route::middleware(['auth'])->group(function () {
+
+
+
+	Route::get('/', function () {
+	    return view('welcome');
+	});
+//BIGCOMMERCE ACTIONS
+Route::get('/bc_fetch_orders', 'BcController@fetch_orders')->name('bc_fetch_orders');
+
+
+!q
+//BIGCOMMERCE ACTIONS
+
+Route::get('/purchase', 'PurchaseController@index')->name('purchase');
+
+Route::get('/purchase_list', 'PurchaseController@list')->name('purchase_list');
+
+Route::get('/purchase_placed', 'PurchaseController@placed')->name('purchase_placed');
+
+Route::get('/purchase_detail/{id}', 'PurchaseController@detail')->name('purchase_detail');
+
+Route::get('/receive_porder/{id}', 'PurchaseController@update')->name('receive_porder');
+
+
+Route::get('/add_purchase_item', 'PurchaseController@addItem')->name('add_purchase_item');
+
+Route::get('/remove_purchase_item', 'PurchaseController@removeItem')->name('remove_purchase_item');
+
+Route::post('/makepurchase', 'PurchaseController@makePurchase')->name('makepurchase');
+
+Route::get('/sales', 'SalesController@index')->name('sales');
+
+Route::post('/select_customer', 'SalesController@selectCustomer')->name('select_customer');
+
+Route::get('/select_items', 'SalesController@selectItems')->name('select_items');
+
+Route::post('/select_item', 'SalesController@selectItem')->name('select_item');
+
+Route::get('/listing', 'SalesController@listing')->name('listing');
+
+Route::get('/getchildcats', 'HomeController@getcat_child')->name('home');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('/saveitem', 'HomeController@save')->name('saveitem');
+
+Route::get('/add', 'HomeController@add')->name('item_add');
+
+Route::get('/item_detail/{id}', 'HomeController@detail')->name('item_detail');
+
+
+Route::get('/hawavee_orders/{id}', 'OrdersController@hawavee_detail')->name('hawavee_order_detail');
+
+Route::get('/hawavee_orders', 'OrdersController@hawavee')->name('hawavee_orders');
+
+Route::get('/fws_orders/{id}', 'OrdersController@fws_detail')->name('fws_orders');
+
+Route::get('/fws_orders', 'OrdersController@fws')->name('fws_orders');
+
+Route::get('/ebay_orders', 'OrdersController@ebay')->name('ebay_orders');
+
+Route::get('/ebay_items', 'EbayController@viewEbayItems')->name('ebay_items');
+
+Route::get('/ebay_post_items/{item}', 'EbayController@postItemEbay')->name('ebay_post_items');
+
+Route::get('/ebay_categories', 'EbayController@getAllCategories')->name('ebay_all_categories');
+
+});
